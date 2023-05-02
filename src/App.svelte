@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Footer from "./components/Footer.svelte";
     import Header from "./components/Header.svelte";
     import Visualization from "./components/Visualization.svelte";
 </script>
@@ -9,14 +10,6 @@
 
 <Header />
 
-<main>
-    <Visualization />
-</main>
+<Visualization />
 
-<style>
-    main {
-        padding-inline: 1rem;
-        max-width: 32rem;
-        margin-inline: auto;
-    }
-</style>
+<Footer />

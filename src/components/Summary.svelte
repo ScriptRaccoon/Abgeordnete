@@ -29,7 +29,7 @@
 
 <style>
     section {
-        margin-block: 1rem 2rem;
+        padding-block: 1rem;
         font-size: 1.2rem;
     }
     ul {
