@@ -2,7 +2,7 @@
     import { groups } from "../data/groups";
     export let selected_group: group;
 
-    let selected_index: number;
+    let selected_index: number = 0;
 
     $: {
         selected_group = groups[selected_index];
@@ -17,7 +17,6 @@
             {@html group.label}
         </option>
     {/each}
-    <option value="0" />
 </select>
 
 <style>
