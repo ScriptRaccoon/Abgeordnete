@@ -8,22 +8,24 @@
     }[];
 </script>
 
-<section aria-label="Zusammenfassung" aria-live="polite">
-    <p>
-        In der Altersgruppe
-        <span class="group">{@html selected_group.label}</span>
-        teilen sich {sum} Abgeordnete wie folgt auf:
-    </p>
-    <ul>
-        {#each counts as entry}
-            {@const percent = Math.round((entry.count / sum) * 100)}
-            <li>
-                {entry.name}: <span class="count">{entry.count}</span>
-                ({percent}%)
-            </li>
-        {/each}
-    </ul>
-</section>
+{#key selected_group.min}
+    <section aria-label="Zusammenfassung" aria-live="polite">
+        <p>
+            In der Altersgruppe
+            <span class="group">{@html selected_group.label}</span>
+            teilen sich {sum} Abgeordnete wie folgt auf:
+        </p>
+        <ul>
+            {#each counts as entry}
+                {@const percent = Math.round((entry.count / sum) * 100)}
+                <li>
+                    {entry.name}: <span class="count">{entry.count}</span>
+                    ({percent}%)
+                </li>
+            {/each}
+        </ul>
+    </section>
+{/key}
 
 <style>
     section {
