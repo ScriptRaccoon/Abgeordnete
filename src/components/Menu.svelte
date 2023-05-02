@@ -1,34 +1,49 @@
 <script lang="ts">
     import { groups } from "../data/groups";
     export let selected_group: group;
-
-    let selected_index: number = 0;
-
-    $: {
-        selected_group = groups[selected_index];
-    }
 </script>
 
-<label for="menu">Wähle eine Altersgruppe aus.</label>
+<p id="choice">Wähle eine Altersgruppe aus.</p>
 
-<select id="menu" bind:value={selected_index}>
-    {#each groups as group, index}
-        <option value={index}>
+<div role="listbox" class="menu" aria-label="Altersgruppe">
+    {#each groups as group}
+        <button
+            role="option"
+            aria-selected={group === selected_group}
+            class:selected={selected_group === group}
+            on:click={() => {
+                selected_group = group;
+            }}
+        >
             {@html group.label}
-        </option>
+        </button>
     {/each}
-</select>
+</div>
 
 <style>
-    select {
-        padding: 0.2rem;
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding-block: 1rem;
+    }
+    button {
         font-family: inherit;
         font-size: inherit;
-        border: 0.1rem solid #aaa;
+        color: inherit;
+        border: none;
+        padding: 0.4rem 0.6rem;
         border-radius: 0.25rem;
+        cursor: pointer;
     }
-    select:focus {
-        border-color: steelblue;
-        outline: none;
+
+    button:focus-visible {
+        outline: 0.1rem solid var(--primary-color);
+        outline-offset: 0.1rem;
+    }
+
+    button.selected {
+        background-color: var(--primary-color);
+        color: white;
     }
 </style>
