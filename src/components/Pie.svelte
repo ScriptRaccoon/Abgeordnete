@@ -1,6 +1,7 @@
 <script lang="ts">
     import { tweened } from "svelte/motion";
     import { cubicInOut } from "svelte/easing";
+
     import { parties } from "../data/parties";
     import { partial_sums } from "../utils";
 

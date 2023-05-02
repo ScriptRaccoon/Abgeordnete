@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { members } from "../data/members";
-    import { parties } from "../data/parties";
-
     import Summary from "./Summary.svelte";
     import Menu from "./Menu.svelte";
     import Pie from "./Pie.svelte";
+
+    import { members } from "../data/members";
+    import { parties } from "../data/parties";
     import { groups } from "../data/groups";
 
     const current_year = 2023;
