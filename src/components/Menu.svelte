@@ -24,5 +24,11 @@
         padding: 0.2rem;
         font-family: inherit;
         font-size: inherit;
+        border: 0.1rem solid #aaa;
+        border-radius: 0.25rem;
+    }
+    select:focus {
+        border-color: steelblue;
+        outline: none;
     }
 </style>
