@@ -8,8 +8,8 @@
 
 <style>
     footer {
-        padding-block: 1rem;
-        color: #555;
+        padding-block: 1rem 2rem;
+        color: var(--light-color);
         font-size: smaller;
     }
 </style>

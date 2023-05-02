@@ -32,9 +32,10 @@
         font-size: inherit;
         color: inherit;
         border: none;
-        padding: 0.4rem 0.6rem;
+        padding-block: 0.4rem;
         border-radius: 0.25rem;
         cursor: pointer;
+        width: 4.25rem;
     }
 
     button:focus-visible {

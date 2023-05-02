@@ -27,7 +27,7 @@
 </script>
 
 <section aria-label="Kuchendiagramm" aria-hidden="true">
-    <svg viewBox="-1.2 -1.2 2.4 2.4">
+    <svg viewBox="-1 -1 2 2">
         {#each distribution as _, index}
             {@const start_percent = $cumulative_percentages[index]}
             {@const end_percent = $cumulative_percentages[index + 1] ?? 1}
@@ -49,7 +49,10 @@
 <style>
     section {
         padding-block: 1rem;
+        max-width: 24rem;
+        margin-inline: auto;
     }
+
     svg {
         transform: rotate(-90deg);
     }
