@@ -1,5 +1,5 @@
 export const groups: group[] = [
-    { label: "Alle", min: 20, max: 89 },
+    { label: "Alle", min: 0, max: 100 },
     { label: "20&ndash;29", min: 20, max: 29 },
     { label: "30&ndash;39", min: 30, max: 39 },
     { label: "40&ndash;49", min: 40, max: 49 },
