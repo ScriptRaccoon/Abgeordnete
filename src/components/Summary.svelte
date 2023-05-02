@@ -1,17 +1,17 @@
 <script lang="ts">
-    export let selected_age_index: number = 2;
-    export let sum: number = 0;
+    export let selected_group: group;
+    export let sum: number;
     export let counts: {
         name: party_name;
         count: number;
         color: string;
-    }[] = [];
+    }[];
 </script>
 
 <section aria-label="Zusammenfassung" aria-live="polite">
     <p>
         In der Altersgruppe
-        {10 * selected_age_index}&ndash;{selected_age_index * 10 + 9}
+        <span class="group">{@html selected_group.label}</span>
         teilen sich {sum} Abgeordnete wie folgt auf:
     </p>
     <ul>
@@ -35,6 +35,9 @@
         margin-left: 1.5rem;
     }
     .count {
+        font-weight: bold;
+    }
+    .group {
         font-weight: bold;
     }
 </style>

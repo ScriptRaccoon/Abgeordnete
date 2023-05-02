@@ -23,3 +23,9 @@ type point = {
     x: number;
     y: number;
 };
+
+type group = {
+    label: string;
+    min: number;
+    max: number;
+};

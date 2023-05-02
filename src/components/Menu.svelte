@@ -1,21 +1,21 @@
 <script lang="ts">
-    export let selected_age_index: number;
-    const age_indices = [2, 3, 4, 5, 6, 7, 8];
+    import { groups } from "../data/groups";
+    export let selected_group: group;
 </script>
 
 <p id="choice">Wähle eine Altersgruppe aus.</p>
 
 <menu aria-describedby="choice">
-    {#each age_indices as index}
+    {#each groups as group}
         <button
             role="option"
-            aria-selected={index === selected_age_index}
-            class:active={selected_age_index === index}
+            aria-selected={group === selected_group}
+            class:active={selected_group === group}
             on:click={() => {
-                selected_age_index = index;
+                selected_group = group;
             }}
         >
-            {10 * index}&ndash;{10 * index + 9}
+            {@html group.label}
         </button>
     {/each}
 </menu>
@@ -38,6 +38,7 @@
     }
 
     button.active {
-        background-color: skyblue;
+        background-color: cornflowerblue;
+        color: white;
     }
 </style>

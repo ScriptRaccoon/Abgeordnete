@@ -5,18 +5,19 @@
     import Summary from "./Summary.svelte";
     import Menu from "./Menu.svelte";
     import Pie from "./Pie.svelte";
+    import { groups } from "../data/groups";
 
     const current_year = 2023;
 
-    let selected_age_index = 2;
+    let selected_group: group = groups[0];
 
     $: selected_members = members.filter((member) =>
-        fits_to_age_index(member, selected_age_index)
+        fits_in_group(member, selected_group)
     );
 
-    function fits_to_age_index(member: member, index: number) {
+    function fits_in_group(member: member, group: group) {
         const age = current_year - member.birth_year;
-        return age >= 10 * index && age < 10 * (index + 1);
+        return age >= group.min && age <= group.max;
     }
 
     $: counts = selected_members.reduce(
@@ -35,8 +36,8 @@
     $: distribution = counts.map((party) => party.count / sum);
 </script>
 
-<Menu bind:selected_age_index />
+<Menu bind:selected_group />
 
 <Pie {distribution} />
 
-<Summary {counts} {sum} {selected_age_index} />
+<Summary {counts} {sum} {selected_group} />
