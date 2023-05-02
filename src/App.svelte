@@ -8,8 +8,8 @@
     <title>Abgeordnete im Bundestag</title>
 </svelte:head>
 
-<Header />
-
-<Visualization />
-
-<Footer />
+<div class="container">
+    <Header />
+    <Visualization />
+    <Footer />
+</div>

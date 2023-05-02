@@ -36,10 +36,8 @@
     $: distribution = counts.map((party) => party.count / sum);
 </script>
 
-<main class="container">
+<main>
     <Menu bind:selected_group />
-
     <Pie {distribution} />
-
     <Summary {counts} {sum} {selected_group} />
 </main>
