@@ -33,8 +33,9 @@
     }
 
     function show_tooltip(e: MouseEvent, index: number) {
+        const top = window.pageYOffset || document.documentElement.scrollTop;
         mouse.x = e.clientX;
-        mouse.y = e.clientY;
+        mouse.y = e.clientY + top;
         selected_party_index = index;
     }
 
