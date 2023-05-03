@@ -44,8 +44,6 @@
         mouse.y = null;
         selected_party_index = null;
     }
-
-    $: console.log($cumulative_percentages);
 </script>
 
 {#if selected_party_index !== null}
