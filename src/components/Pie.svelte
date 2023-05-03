@@ -1,11 +1,19 @@
 <script lang="ts">
     import { tweened } from "svelte/motion";
     import { cubicInOut } from "svelte/easing";
+    import { fade } from "svelte/transition";
 
     import { parties } from "../data/parties";
     import { partial_sums } from "../utils";
 
     export let distribution: number[] = [];
+
+    let mouse: {
+        x: number | null;
+        y: number | null;
+    } = { x: null, y: null };
+
+    let selected_party_index: number | null = null;
 
     const tween_options = { duration: 750, easing: cubicInOut };
 
@@ -24,7 +32,30 @@
         const y = Math.sin(percent * 2 * Math.PI);
         return { x, y };
     }
+
+    function show_tooltip(e: MouseEvent, index: number) {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        selected_party_index = index;
+    }
+
+    function hide_tooltip() {
+        mouse.x = null;
+        mouse.y = null;
+        selected_party_index = null;
+    }
 </script>
+
+{#if selected_party_index !== null}
+    <div
+        transition:fade={{ duration: 150 }}
+        class="tooltip"
+        style="left: {mouse.x + 5}px; top: {mouse.y + 5}px"
+    >
+        {parties[selected_party_index].name}
+        {Math.round(distribution[selected_party_index] * 100)}%
+    </div>
+{/if}
 
 <section aria-label="Kuchendiagramm" aria-hidden="true">
     <svg viewBox="-1 -1 2 2">
@@ -34,11 +65,14 @@
             {@const start_point = get_point(start_percent)}
             {@const end_point = get_point(end_percent)}
             {@const flag = end_percent - start_percent > 0.5 ? 1 : 0}
+            {@const party = parties[index]}
             <path
+                on:mousemove={(e) => show_tooltip(e, index)}
+                on:mouseleave={hide_tooltip}
                 d="M 0 0
                    L {start_point.x} {start_point.y}
                    A 1 1 0 {flag} 1 {end_point.x} {end_point.y}"
-                fill={parties[index].color}
+                fill={party.color}
             />
         {/each}
 
@@ -55,5 +89,14 @@
 
     svg {
         transform: rotate(-90deg);
+    }
+
+    .tooltip {
+        position: absolute;
+        z-index: 10;
+        background-color: white;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        box-shadow: 0rem 0rem 1rem #0005;
     }
 </style>
