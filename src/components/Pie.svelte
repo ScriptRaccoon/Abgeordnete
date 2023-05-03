@@ -28,8 +28,8 @@
     }
 
     function get_point(percent: number): point {
-        const x = Math.cos(percent * 2 * Math.PI);
-        const y = Math.sin(percent * 2 * Math.PI);
+        const x = Math.cos(percent * 2 * Math.PI - Math.PI / 2);
+        const y = Math.sin(percent * 2 * Math.PI - Math.PI / 2);
         return { x, y };
     }
 
@@ -73,8 +73,8 @@
                     on:mousemove={(e) => show_tooltip(e, index)}
                     on:mouseleave={hide_tooltip}
                     d="M 0 0
-                   L {start_point.x} {start_point.y}
-                   A 1 1 0 {flag} 1 {end_point.x} {end_point.y}"
+                       L {start_point.x} {start_point.y}
+                       A 1 1 0 {flag} 1 {end_point.x} {end_point.y}"
                     fill={party.color}
                 />
             {/if}
@@ -89,10 +89,6 @@
         padding-block: 1rem;
         max-width: 24rem;
         margin-inline: auto;
-    }
-
-    svg {
-        transform: rotate(-90deg);
     }
 
     .tooltip {
