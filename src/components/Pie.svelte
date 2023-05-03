@@ -15,16 +15,15 @@
 
     let selected_party_index: number | null = null;
 
-    const tween_options = { duration: 750, easing: cubicInOut };
-
     const cumulative_percentages = tweened(
         new Array(distribution.length).fill(0),
-        tween_options
+        { duration: 750, easing: cubicInOut }
     );
 
     $: {
-        const relevant_numbers = distribution.slice(0, distribution.length - 1);
-        $cumulative_percentages = partial_sums(relevant_numbers);
+        $cumulative_percentages = partial_sums(
+            distribution.slice(0, distribution.length - 1)
+        );
     }
 
     function get_point(percent: number): point {
