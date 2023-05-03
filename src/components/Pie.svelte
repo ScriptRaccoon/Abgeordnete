@@ -44,6 +44,8 @@
         mouse.y = null;
         selected_party_index = null;
     }
+
+    $: console.log($cumulative_percentages);
 </script>
 
 {#if selected_party_index !== null}
@@ -62,18 +64,20 @@
         {#each distribution as _, index}
             {@const start_percent = $cumulative_percentages[index]}
             {@const end_percent = $cumulative_percentages[index + 1] ?? 1}
-            {@const start_point = get_point(start_percent)}
-            {@const end_point = get_point(end_percent)}
-            {@const flag = end_percent - start_percent > 0.5 ? 1 : 0}
-            {@const party = parties[index]}
-            <path
-                on:mousemove={(e) => show_tooltip(e, index)}
-                on:mouseleave={hide_tooltip}
-                d="M 0 0
+            {#if end_percent > start_percent}
+                {@const start_point = get_point(start_percent)}
+                {@const end_point = get_point(end_percent)}
+                {@const flag = end_percent - start_percent > 0.5 ? 1 : 0}
+                {@const party = parties[index]}
+                <path
+                    on:mousemove={(e) => show_tooltip(e, index)}
+                    on:mouseleave={hide_tooltip}
+                    d="M 0 0
                    L {start_point.x} {start_point.y}
                    A 1 1 0 {flag} 1 {end_point.x} {end_point.y}"
-                fill={party.color}
-            />
+                    fill={party.color}
+                />
+            {/if}
         {/each}
 
         <circle cx="0" cy="0" r="0.25" fill="white" />
