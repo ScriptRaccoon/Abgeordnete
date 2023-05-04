@@ -12,14 +12,14 @@
     <section aria-label="Zusammenfassung" aria-live="polite">
         <p>
             In der Altersgruppe
-            <span class="strong">{@html selected_group.label}</span>
-            teilen sich <span class="strong">{sum}</span> Abgeordnete wie folgt auf:
+            <strong>{@html selected_group.label}</strong>
+            teilen sich <strong>{sum}</strong> Abgeordnete wie folgt auf:
         </p>
         <ul>
             {#each counts as entry}
                 {@const percent = Math.round((entry.count / sum) * 100)}
                 <li>
-                    {entry.name}: <span class="strong">{entry.count}</span>
+                    {entry.name}: <strong>{entry.count}</strong>
                     ({percent}%)
                 </li>
             {/each}

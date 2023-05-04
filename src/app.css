@@ -21,7 +21,7 @@ a {
     color: inherit;
 }
 
-.strong {
+strong {
     font-weight: bold;
     color: var(--primary-color);
 }
