@@ -31,9 +31,9 @@
     }
 
     function show_tooltip(e: MouseEvent, party: party_data) {
-        const top = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollTop = document.documentElement.scrollTop;
         mouse.x = e.clientX;
-        mouse.y = e.clientY + top;
+        mouse.y = e.clientY + scrollTop;
         selected_party = party;
     }
 
