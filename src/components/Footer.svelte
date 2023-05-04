@@ -3,7 +3,10 @@
     <a
         href="https://de.wikipedia.org/wiki/Liste_der_Mitglieder_des_Deutschen_Bundestages_%2820._Wahlperiode%29"
         target="_blank">Wikipedia</a
-    >
+    >. Der Code ist auf
+    <a href="https://github.com/ScriptRaccoon/Abgeordnete/" target="_blank"
+        >GitHub</a
+    >.
 </footer>
 
 <style>
