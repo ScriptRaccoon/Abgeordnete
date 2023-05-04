@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { groups } from "../data/groups";
+    import { groups } from "@/data/groups";
     export let selected_group: group;
 </script>
 

@@ -1,7 +1,8 @@
 // The following script needs to be executed on the Wikipedia page
 // https://de.wikipedia.org/wiki/Liste_der_Mitglieder_des_Deutschen_Bundestages_%2820._Wahlperiode%29
-// to print the list of all members of the Bundestag.
-// The output is saved in the file member.ts (as of May 2023).
+// to print the list of all members of the German Bundestag.
+// The output is saved in the file members.ts (as of May 2023).
+// The TypeScript compiler validates the data for us.
 
 function generate_members() {
     const table = document.querySelectorAll("table")[2];
@@ -17,6 +18,7 @@ function generate_members() {
         const party_name = normalize_party(cells[3].innerText.trim());
 
         const member = { name, birth_year, party_name };
+
         members.push(member);
     }
 

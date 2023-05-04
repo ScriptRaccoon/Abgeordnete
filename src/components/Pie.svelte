@@ -3,8 +3,8 @@
     import { cubicInOut } from "svelte/easing";
     import { fade } from "svelte/transition";
 
-    import { parties } from "../data/parties";
-    import { partial_sums } from "../utils";
+    import { parties } from "@/data/parties";
+    import { partial_sums } from "@/utils";
 
     export let distribution: number[] = [];
 
