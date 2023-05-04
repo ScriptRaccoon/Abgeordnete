@@ -28,10 +28,10 @@
             if (index >= 0) prev[index].count++;
             return prev;
         },
-        parties.map((p) => ({ ...p, count: 0 }))
+        parties.map((party) => ({ name: party.name, count: 0 }))
     );
 
-    $: sum = counts.reduce((prev, party) => prev + party.count, 0);
+    $: sum = selected_members.length;
 
     $: distribution = counts.map((party) => party.count / sum);
 </script>

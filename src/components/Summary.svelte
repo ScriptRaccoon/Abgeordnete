@@ -4,7 +4,6 @@
     export let counts: {
         name: party_name;
         count: number;
-        color: string;
     }[];
 </script>
 
