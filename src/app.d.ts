@@ -13,6 +13,11 @@ type party = {
     color: string;
 };
 
+type party_data = party & {
+    count: number;
+    percent: number;
+};
+
 type member = {
     name: string;
     birth_year: number;

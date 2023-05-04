@@ -3,25 +3,25 @@
     import { cubicInOut } from "svelte/easing";
     import { fade } from "svelte/transition";
 
-    import { parties } from "@/data/parties";
     import { partial_sums } from "@/utils";
 
-    export let distribution: number[] = [];
+    export let party_data_list: party_data[] = [];
 
     let mouse: {
         x: number | null;
         y: number | null;
     } = { x: null, y: null };
 
-    let selected_party_index: number | null = null;
+    let selected_party: party_data | null = null;
 
-    const cumulative_percentages = tweened(
-        new Array(distribution.length + 1).fill(0),
+    const cumulative_distribution = tweened(
+        new Array(party_data_list.length + 1).fill(0),
         { duration: 750, easing: cubicInOut }
     );
 
     $: {
-        $cumulative_percentages = partial_sums(distribution);
+        const distribution = party_data_list.map((party) => party.percent);
+        $cumulative_distribution = partial_sums(distribution);
     }
 
     function get_point(percent: number): point {
@@ -30,43 +30,42 @@
         return { x, y };
     }
 
-    function show_tooltip(e: MouseEvent, index: number) {
+    function show_tooltip(e: MouseEvent, party: party_data) {
         const top = window.pageYOffset || document.documentElement.scrollTop;
         mouse.x = e.clientX;
         mouse.y = e.clientY + top;
-        selected_party_index = index;
+        selected_party = party;
     }
 
     function hide_tooltip() {
         mouse.x = null;
         mouse.y = null;
-        selected_party_index = null;
+        selected_party = null;
     }
 </script>
 
-{#if selected_party_index !== null}
+{#if selected_party !== null}
     <div
         transition:fade={{ duration: 150 }}
         class="tooltip"
         style="left: {mouse.x + 5}px; top: {mouse.y + 5}px"
     >
-        {parties[selected_party_index].name}
-        {Math.round(distribution[selected_party_index] * 100)}%
+        {selected_party.name}
+        {Math.round(selected_party.percent * 100)}%
     </div>
 {/if}
 
 <section aria-label="Kuchendiagramm" aria-hidden="true">
     <svg viewBox="-1 -1 2 2">
-        {#each distribution as _, index}
-            {@const start_percent = $cumulative_percentages[index]}
-            {@const end_percent = $cumulative_percentages[index + 1]}
+        {#each party_data_list as party, index}
+            {@const start_percent = $cumulative_distribution[index]}
+            {@const end_percent = $cumulative_distribution[index + 1]}
             {#if end_percent > start_percent}
                 {@const start_point = get_point(start_percent)}
                 {@const end_point = get_point(end_percent)}
                 {@const flag = end_percent - start_percent > 0.5 ? 1 : 0}
-                {@const party = parties[index]}
                 <path
-                    on:mousemove={(e) => show_tooltip(e, index)}
+                    on:mousemove={(e) => show_tooltip(e, party)}
                     on:mouseleave={hide_tooltip}
                     d="M 0 0
                        L {start_point.x} {start_point.y}

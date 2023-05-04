@@ -15,29 +15,29 @@
         fits_in_group(member, selected_group)
     );
 
+    $: sum = selected_members.length;
+
     function fits_in_group(member: member, group: group) {
         const age = current_year - member.birth_year;
         return age >= group.min && age <= group.max;
     }
 
-    $: counts = selected_members.reduce(
-        (prev, member) => {
-            const index = parties.findIndex(
-                (p) => p.name === member.party_name
-            );
-            if (index >= 0) prev[index].count++;
-            return prev;
-        },
-        parties.map((party) => ({ name: party.name, count: 0 }))
-    );
-
-    $: sum = selected_members.length;
-
-    $: distribution = counts.map((party) => party.count / sum);
+    $: party_data_list = selected_members
+        .reduce(
+            (list, member) => {
+                const index = parties.findIndex(
+                    (party) => party.name === member.party_name
+                );
+                if (index >= 0) list[index].count++;
+                return list;
+            },
+            parties.map((party) => ({ ...party, count: 0 }))
+        )
+        .map((data) => ({ ...data, percent: data.count / sum }));
 </script>
 
 <main>
     <Menu bind:selected_group />
-    <Pie {distribution} />
-    <Summary {counts} {sum} {selected_group} />
+    <Pie {party_data_list} />
+    <Summary {party_data_list} {sum} {selected_group} />
 </main>

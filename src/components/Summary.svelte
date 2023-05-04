@@ -1,10 +1,7 @@
 <script lang="ts">
-    export let selected_group: group;
     export let sum: number;
-    export let counts: {
-        name: party_name;
-        count: number;
-    }[];
+    export let party_data_list: party_data[];
+    export let selected_group: group;
 </script>
 
 {#key selected_group.min}
@@ -15,10 +12,10 @@
             teilen sich <strong>{sum}</strong> Abgeordnete wie folgt auf:
         </p>
         <ul>
-            {#each counts as entry}
-                {@const percent = Math.round((entry.count / sum) * 100)}
+            {#each party_data_list as party}
+                {@const percent = Math.round(party.percent * 100)}
                 <li>
-                    {entry.name}: <strong>{entry.count}</strong>
+                    {party.name}: <strong>{party.count}</strong>
                     ({percent}%)
                 </li>
             {/each}
