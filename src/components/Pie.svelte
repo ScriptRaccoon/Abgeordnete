@@ -44,7 +44,7 @@
     }
 </script>
 
-{#if selected_party !== null}
+{#if selected_party}
     <div
         transition:fade={{ duration: 150 }}
         class="tooltip"
