@@ -16,14 +16,12 @@
     let selected_party_index: number | null = null;
 
     const cumulative_percentages = tweened(
-        new Array(distribution.length).fill(0),
+        new Array(distribution.length + 1).fill(0),
         { duration: 750, easing: cubicInOut }
     );
 
     $: {
-        $cumulative_percentages = partial_sums(
-            distribution.slice(0, distribution.length - 1)
-        );
+        $cumulative_percentages = partial_sums(distribution);
     }
 
     function get_point(percent: number): point {
@@ -61,7 +59,7 @@
     <svg viewBox="-1 -1 2 2">
         {#each distribution as _, index}
             {@const start_percent = $cumulative_percentages[index]}
-            {@const end_percent = $cumulative_percentages[index + 1] ?? 1}
+            {@const end_percent = $cumulative_percentages[index + 1]}
             {#if end_percent > start_percent}
                 {@const start_point = get_point(start_percent)}
                 {@const end_point = get_point(end_percent)}
