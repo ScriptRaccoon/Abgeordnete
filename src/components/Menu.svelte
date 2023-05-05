@@ -3,7 +3,7 @@
     export let selected_group: group;
 </script>
 
-<p id="choice">Wähle eine Altersgruppe aus.</p>
+<p>Wähle eine Altersgruppe aus.</p>
 
 <div role="listbox" class="menu" aria-label="Altersgruppe">
     {#each groups as group}
