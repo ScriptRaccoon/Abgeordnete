@@ -7,6 +7,12 @@
 
     export let party_data_list: party_data[] = [];
 
+    $: distribution = party_data_list.map((party) => party.percent);
+
+    $: {
+        $cumulative_distribution = partial_sums(distribution);
+    }
+
     let mouse: {
         x: number | null;
         y: number | null;
@@ -18,11 +24,6 @@
         new Array(party_data_list.length + 1).fill(0),
         { duration: 750, easing: cubicInOut }
     );
-
-    $: {
-        const distribution = party_data_list.map((party) => party.percent);
-        $cumulative_distribution = partial_sums(distribution);
-    }
 
     function get_point(percent: number): point {
         const x = Math.cos(percent * 2 * Math.PI - Math.PI / 2);
@@ -44,18 +45,18 @@
     }
 </script>
 
-{#if selected_party}
-    <div
-        transition:fade={{ duration: 150 }}
-        class="tooltip"
-        style="left: {mouse.x + 5}px; top: {mouse.y + 5}px"
-    >
-        {selected_party.name}
-        {Math.round(selected_party.percent * 100)}%
-    </div>
-{/if}
-
 <section aria-label="Kuchendiagramm" aria-hidden="true">
+    {#if selected_party}
+        <div
+            transition:fade={{ duration: 150 }}
+            class="tooltip"
+            style="left: {mouse.x + 5}px; top: {mouse.y + 5}px"
+        >
+            {selected_party.name}
+            {Math.round(selected_party.percent * 100)}%
+        </div>
+    {/if}
+
     <svg viewBox="-1 -1 2 2">
         {#each party_data_list as party, index}
             {@const start_percent = $cumulative_distribution[index]}

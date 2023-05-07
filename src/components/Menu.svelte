@@ -27,6 +27,7 @@
         gap: 0.5rem;
         padding-block: 1rem;
     }
+
     button {
         font-family: inherit;
         font-size: inherit;

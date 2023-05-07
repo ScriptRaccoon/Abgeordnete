@@ -11,6 +11,7 @@
             <strong>{@html selected_group.label}</strong>
             teilen sich <strong>{sum}</strong> Abgeordnete wie folgt auf:
         </p>
+
         <ul>
             {#each party_data_list as party}
                 {@const percent = Math.round(party.percent * 100)}
@@ -28,6 +29,7 @@
         padding-block: 1rem;
         font-size: 1.2rem;
     }
+
     ul {
         margin-top: 0.5rem;
         margin-left: 1.5rem;
